@@ -30,9 +30,9 @@ function New-UDMarquee {
         [Parameter(Mandatory)]
         [object]$Messages,
         [Parameter()]
-        [int]$RotateInterval = 5000,
+        [string]$Seperator = ' • ',
         [Parameter()]
-        [int]$Speed = 20,
+        [int]$Speed = 40,
         [Parameter()]
         [string]$BackgroundColor,
         [Parameter()]
@@ -47,7 +47,7 @@ function New-UDMarquee {
             id              = $Id
 
             messages        = $Messages
-            rotateInterval  = $RotateInterval
+            seperator       = $Seperator
             speed           = $Speed
             backgroundColor = $BackgroundColor
             color           = $Color

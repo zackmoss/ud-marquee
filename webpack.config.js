@@ -10,7 +10,7 @@ module.exports = (env) => {
 
   return {
     entry: {
-      'index' : __dirname + '/components/index.js'
+      'index': __dirname + '/components/index.js'
     },
     output: {
       path: BUILD_DIR,
@@ -20,13 +20,15 @@ module.exports = (env) => {
       library: 'udcomponent',
       libraryTarget: 'var'
     },
-    module : {
-      rules : [
+    module: {
+      rules: [
         { test: /\.css$/, loader: "style-loader!css-loader" },
-        { test: /\.(js|jsx)$/, exclude: [/node_modules/, /public/], loader: 'babel-loader'},
-        { test: /\.(eot|ttf|woff2?|otf|svg|png)$/, loader:'file-loader', options: {
-          name: '[name].[ext]'
-        } }
+        { test: /\.(js|jsx)$/, exclude: [/node_modules/, /public/], loader: 'babel-loader' },
+        {
+          test: /\.(eot|ttf|woff2?|otf|svg|png)$/, loader: 'file-loader', options: {
+            name: '[name].[ext]'
+          }
+        }
       ]
     },
     externals: {
@@ -44,7 +46,7 @@ module.exports = (env) => {
       historyApiFallback: true,
       port: 10000,
       // hot: true,
-      compress:true,
+      compress: true,
       publicPath: '/',
       stats: "minimal"
     },

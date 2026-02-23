@@ -1,60 +1,56 @@
-import React from "react";
-import { withComponentFeatures } from "universal-dashboard";
+import React from 'react';
+import { withComponentFeatures } from 'universal-dashboard';
 
 const UDMarquee = (props) => {
+
   const normalizeMessages = () => {
     if (!props.messages) return [];
 
-    if (Array.isArray(props.messages)) {
-      return props.messages;
-    }
+    if (Array.isArray(props.messages)) return props.messages;
 
     return [props.messages];
   };
 
   const messages = normalizeMessages();
-  const [index, setIndex] = useState(0);
 
-  useEffect(() => {
-    if (messages.length <= 1) return;
+  const text = messages
 
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % messages.length);
-    }, props.rotateInterval || 5000);
-
-    return () => clearInterval(interval);
-  }, [messages]);
-
-  const speed = props.speed || 20;
+  const speed = props.speed || 40;
 
   const containerStyle = {
     overflow: "hidden",
     whiteSpace: "nowrap",
     width: "100%",
-    background: props.backgroundColor || "#111",
-    color: props.color || "#fff",
+    backgroundColor: "#013D5B",
+    color: "#ffffff",
     padding: "6px 0",
     position: "relative",
+    fontSize: props.fontSize || "14px",
+    borderRadius: "5px"
   };
 
-  const textStyle = {
+  const trackStyle = {
     display: "inline-block",
+    whiteSpace: "nowrap",
     paddingLeft: "100%",
-    animation: `scroll ${speed}s linear infinite`,
+    animation: `scroll ${speed}s linear infinite`
   };
 
   return (
     <div style={containerStyle}>
-      <style>
-        {`
-                @keyframes scroll {
-                    0%   { transform: translateX(0); }
-                    100% { transform: translateX(-100%); }
-                }
-                `}
-      </style>
-
-      <div style={textStyle}>{messages[index] || ""}</div>
+      <style> {`
+          @keyframes scroll {
+              0%   { transform: translateX(0); }
+              100% { transform: translateX(-100%); }
+          }
+        `} </style>
+      <div style={trackStyle}>
+        {text.map((msg, i) => (
+          <span key={i} style={{ marginRight: "50px" }}>
+            {msg}
+          </span>
+        ))}
+      </div>
     </div>
   );
 };
