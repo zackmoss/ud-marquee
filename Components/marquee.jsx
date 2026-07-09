@@ -1,7 +1,8 @@
-import React from 'react';
-import { withComponentFeatures } from 'universal-dashboard';
+import React from "react";
+import { withComponentFeatures } from "universal-dashboard";
 
 const UDMarquee = (props) => {
+  const [paused, setPaused] = React.useState(false);
 
   const normalizeMessages = () => {
     if (!props.messages) return [];
@@ -13,7 +14,7 @@ const UDMarquee = (props) => {
 
   const messages = normalizeMessages();
 
-  const text = messages
+  const text = messages;
 
   const speed = props.speed || 40;
 
@@ -21,29 +22,37 @@ const UDMarquee = (props) => {
     overflow: "hidden",
     whiteSpace: "nowrap",
     width: "100%",
-    backgroundColor: "#013D5B",
-    color: "#ffffff",
+    backgroundColor: props.backgroundColor || "",
+    color: props.color || "",
     padding: "6px 0",
     position: "relative",
     fontSize: props.fontSize || "14px",
-    borderRadius: "5px"
+    borderRadius: "5px",
   };
 
   const trackStyle = {
     display: "inline-block",
     whiteSpace: "nowrap",
     paddingLeft: "100%",
-    animation: `scroll ${speed}s linear infinite`
+    animation: `scroll ${speed}s linear infinite`,
+    animationPlayState: paused ? "paused" : "running",
   };
 
   return (
-    <div style={containerStyle}>
-      <style> {`
+    <div
+      style={containerStyle}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <style>
+        {" "}
+        {`
           @keyframes scroll {
               0%   { transform: translateX(0); }
               100% { transform: translateX(-100%); }
           }
-        `} </style>
+        `}{" "}
+      </style>
       <div style={trackStyle}>
         {text.map((msg, i) => (
           <span key={i} style={{ marginRight: "50px" }}>

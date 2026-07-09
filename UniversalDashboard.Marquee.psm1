@@ -36,7 +36,7 @@ function New-UDMarquee {
         [Parameter()]
         [string]$BackgroundColor,
         [Parameter()]
-        [string]$Color
+        [string]$TextColor
     )
 
     end {
@@ -50,7 +50,7 @@ function New-UDMarquee {
             seperator       = $Seperator
             speed           = $Speed
             backgroundColor = $BackgroundColor
-            color           = $Color
+            color           = $TextColor
         }
     }
 }
